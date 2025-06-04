@@ -16,8 +16,8 @@ phases:
       - cat reports/junit.xml || true
       - echo "📊 Reporte de cobertura (LCOV):"
       - head -20 coverage/lcov.info || true
-      - echo "🔧 Corrigiendo TN vacío..."
-      - grep -q '^TN:' coverage/lcov.info || sed -i '1iTN:DefaultTestName' coverage/lcov.info
+      - echo "🔧 Corrigiendo encabezado TN..."
+      - sed -i '1iTN:DefaultTestName' coverage/lcov.info
       - sed -i 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info
 
 reports:
