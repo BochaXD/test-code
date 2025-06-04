@@ -10,17 +10,12 @@ phases:
   build:
     commands:
       - npm test
+      - echo "=== Contenido de reports/ ==="
+      - ls -la reports || echo "No existe carpeta reports"
+      - echo "=== Primeras líneas de junit.xml ==="
+      - cat reports/junit.xml | head || echo "No existe junit.xml"
       - npm run check-passrate
-      - echo "📄 Verificando archivos generados..."
-      - ls -la reports coverage || true
-      - echo "🧪 Reporte de pruebas (JUnit):"
-      - '[ -f reports/junit.xml ] && cat reports/junit.xml || echo "❌ junit.xml no encontrado"'
-      - echo "📊 Reporte de cobertura (LCOV):"
-      - '[ -f coverage/lcov.info ] && head -20 coverage/lcov.info || echo "❌ lcov.info no encontrado"'
-      - echo "🔧 Corrigiendo encabezado TN..."
-      - sed -i '1s/^TN:.*$/TN:DefaultTestName/' coverage/lcov.info
-      - echo "🔍 Línea 1 del lcov.info:" && head -1 coverage/lcov.info
-      - grep "^TN:" coverage/lcov.info
+
 
 reports:
   pruebas:
