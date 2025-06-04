@@ -20,4 +20,17 @@ describe("API Endpoints", () => {
     expect(res.statusCode).toBe(400);
     expect(res.body.error).toBe("Invalid input");
   });
+    test('Falla/Error: Simulación de error', () => {
+    expect(() => {
+      throw new Error('Esto es un error simulado');
+    }).toThrow('Otro mensaje'); // ❌ falla porque no coincide
+  });
+
+  test.skip('Omitido: esta prueba fue omitida', () => {
+    expect(true).toBe(false); // 🟠 omitido
+  });
+
+  test('Desconocido: falla asincrónica sin assert', async () => {
+    await new Promise((_, reject) => setTimeout(() => reject('Desconocido'), 10));
+  });
 });
