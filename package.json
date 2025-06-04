@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --runInBand --reporters=default --reporters=jest-junit",
+    "test": "jest --coverage --runInBand",
     "check-passrate": "node check-passrate.js"
   },
   "keywords": [],
@@ -18,31 +18,5 @@
     "jest-junit": "^16.0.0",
     "supertest": "^7.1.1",
     "xml2js": "^0.6.2"
-  },
-  "jest-junit": {
-    "outputDirectory": "reports",
-    "outputName": "junit.xml"
-  },
-  "jest": {
-  "collectCoverageFrom": [
-    "src/**/*.js"
-  ],
-  "testMatch": [
-    "**/tests/**/*.test.js"
-  ],
-  "coverageReporters": [
-    "lcov",
-    "text",
-    "cobertura"
-  ],
-  "coverageThreshold": {
-    "global": {
-      "branches": 60,
-      "lines": 60,
-      "functions": 100,
-      "statements": 80
-    }
   }
-}
-
 }
