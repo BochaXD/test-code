@@ -5,37 +5,61 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - npm ci
+      - echo "🔄 Instalando dependencias..."
+      - npm ci --silent
+
       - echo "🔍 Verificando librerías deprecadas..."
-      - npm ls deprecated > deprecated.txt || true
-      - cat deprecated.txt
-      - if grep -q 'deprecated' deprecated.txt; then echo "❌ Se encontraron librerías deprecadas. Revisa 'deprecated.txt' para más detalles."; exit 1; fi
+      - npm ls deprecated --json > deprecated.json || true
+      - |
+        if grep -q '"deprecated":' deprecated.json; then
+          echo "❌ Se encontraron librerías deprecadas. Revisa 'deprecated.json' para más detalles."
+          exit 1
+        else
+          echo "✅ No se encontraron librerías deprecadas."
+        fi
+
       - echo "🔍 Verificando librerías desactualizadas..."
-      - npm outdated > outdated.txt || true
-      - cat outdated.txt
-      - if grep -q 'Package' outdated.txt; then echo "⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.txt' para más detalles."; exit 1; fi
+      - npm outdated --json > outdated.json || true
+      - |
+        if [ -s outdated.json ]; then
+          echo "⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.json' para más detalles."
+          exit 1
+        else
+          echo "✅ Todas las librerías están actualizadas."
+        fi
 
   build:
     commands:
-      - npm test
-      - echo "📁 Contenido del directorio 'reports/':"
-      - ls -la reports || echo "⚠️ El directorio 'reports' no existe."
-      - echo "📄 Primeras líneas de 'junit.xml':"
-      - cat reports/junit.xml | head || echo "⚠️ El archivo 'junit.xml' no existe."
+      - echo "🧪 Ejecutando pruebas..."
+      - npm test --silent
+      - echo "📁 Verificando directorio 'reports/'..."
+      - |
+        if [ -d reports ]; then
+          echo "✅ Directorio 'reports/' encontrado."
+        else
+          echo "⚠️ El directorio 'reports/' no existe."
+        fi
+      - echo "📄 Verificando archivo 'junit.xml'..."
+      - |
+        if [ -f reports/junit.xml ]; then
+          echo "✅ Archivo 'junit.xml' encontrado."
+        else
+          echo "⚠️ El archivo 'junit.xml' no existe."
+        fi
 
 reports:
   pruebas:
     base-directory: .
     files:
       - 'reports/junit.xml'
-    file-format: 'JUNITXML'
+    file-format: JUNITXML
 
   cobertura_codigo:
-    base-directory: 'coverage'
+    base-directory: coverage
     files:
       - 'lcov-report/**/*'
       - 'clover.xml'
-    file-format: 'CLOVERXML'
+    file-format: CLOVERXML
     discard-paths: no
 
 artifacts:
