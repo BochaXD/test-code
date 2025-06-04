@@ -11,13 +11,13 @@ phases:
       - echo "=== Checando librerías deprecadas ==="
       - npm ls deprecated > deprecated.txt || true
       - cat deprecated.txt
-      - if grep -q 'deprecated' deprecated.txt; then echo "librerías deprecadas"; exit 1; fi
+      - if grep -q 'deprecated' deprecated.txt; then echo -e "\033[1;31m❌ Se encontraron librerías deprecadas. Revisa 'deprecated.txt' para más detalles.\033[0m"; exit 1; fi
 
       # Checar librerías desactualizadas
       - echo "=== Checando librerías desactualizadas ==="
       - npm outdated > outdated.txt || true
       - cat outdated.txt
-      - if grep -q 'Package' outdated.txt; then echo "librerías desactualizadas"; exit 1; fi
+      - if grep -q 'Package' outdated.txt; then echo -e "\033[1;33m⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.txt' para más detalles.\033[0m"; fi
 
   build:
     commands:
