@@ -15,5 +15,9 @@ app.post("/sum", (req, res) => {
   }
   res.json({ result: a + b });
 });
+function suma(a, b) {
+  const resultado = a + b;
+  return resultado;
+}
 
 module.exports = app;
