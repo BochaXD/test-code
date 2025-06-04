@@ -9,40 +9,36 @@ phases:
       - npm ci --silent
 
       - echo "🔍 Verificando librerías deprecadas..."
-      - npm ls deprecated --json > deprecated.json || true
       - |
+        npm ls deprecated --json > deprecated.json || true
         if grep -q '"deprecated":' deprecated.json; then
           echo "❌ Se encontraron librerías deprecadas. Revisa 'deprecated.json' para más detalles."
           exit 1
-        else
-          echo "✅ No se encontraron librerías deprecadas."
         fi
 
       - echo "🔍 Verificando librerías desactualizadas..."
-      - npm outdated --json > outdated.json || true
       - |
+        npm outdated --json > outdated.json || true
         if [ -s outdated.json ]; then
           echo "⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.json' para más detalles."
           exit 1
-        else
-          echo "✅ Todas las librerías están actualizadas."
         fi
 
   build:
     commands:
       - echo "🧪 Ejecutando pruebas..."
-      - npm test --silent
+      - npm test
       - echo "📁 Verificando directorio 'reports/'..."
       - |
         if [ -d reports ]; then
-          echo "✅ Directorio 'reports/' encontrado."
+          echo "✅ El directorio 'reports/' existe."
         else
           echo "⚠️ El directorio 'reports/' no existe."
         fi
       - echo "📄 Verificando archivo 'junit.xml'..."
       - |
         if [ -f reports/junit.xml ]; then
-          echo "✅ Archivo 'junit.xml' encontrado."
+          echo "✅ El archivo 'junit.xml' existe."
         else
           echo "⚠️ El archivo 'junit.xml' no existe."
         fi
@@ -52,14 +48,14 @@ reports:
     base-directory: .
     files:
       - 'reports/junit.xml'
-    file-format: JUNITXML
+    file-format: 'JUNITXML'
 
   cobertura_codigo:
-    base-directory: coverage
+    base-directory: 'coverage'
     files:
       - 'lcov-report/**/*'
       - 'clover.xml'
-    file-format: CLOVERXML
+    file-format: 'CLOVERXML'
     discard-paths: no
 
 artifacts:
