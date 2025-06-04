@@ -6,15 +6,18 @@ phases:
       nodejs: 18
     commands:
       - npm ci
-      # Validación de librerías deprecadas
+
+      # Checar librerías deprecadas
       - echo "=== Checando librerías deprecadas ==="
       - npm ls deprecated > deprecated.txt || true
       - cat deprecated.txt
       - if grep -q 'deprecated' deprecated.txt; then echo "¡Hay librerías deprecadas!"; exit 1; fi
-      # Validación de vulnerabilidades de dependencias
-      - echo "=== Checando vulnerabilidades ==="
-      - npm audit --audit-level=moderate --json > audit.json || true
-      - node check-audit.js
+
+      # Checar librerías desactualizadas
+      - echo "=== Checando librerías desactualizadas ==="
+      - npm outdated > outdated.txt || true
+      - cat outdated.txt
+      - if grep -q 'Package' outdated.txt; then echo "¡Hay librerías desactualizadas!"; exit 1; fi
 
   build:
     commands:
