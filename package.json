@@ -2,8 +2,8 @@
   "name": "testing-project",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "jest --coverage --runInBand --coverageReporters=lcov --coverageReporters=text --coverageReporters=text-summary"
+"scripts": {
+  "test": "jest --runInBand"
 },
   "keywords": [],
   "author": "",
