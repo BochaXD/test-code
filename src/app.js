@@ -1,4 +1,3 @@
-
 const express = require("express");
 const app = express();
 
@@ -15,14 +14,15 @@ app.post("/sum", (req, res) => {
   }
   res.json({ result: a + b });
 });
+
 function suma(a, b) {
-  const resultado = a + b;
-  return resultado;
-}
-function evaluar(x) {
-  if (x > 0) return "positivo";
-  else if (x < 0) return "negativo";
-  return "cero";
+  return a + b;
 }
 
-module.exports = app;
+function evaluar(valor) {
+  if (valor > 0) return "positivo";
+  else if (valor < 0) return "negativo";
+  else return "cero";
+}
+
+module.exports = { app, suma, evaluar };
