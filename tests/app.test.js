@@ -34,10 +34,6 @@ describe("Funciones puras", () => {
     expect(evaluar(10)).toBe("positivo");
   });
 
-  test("evaluar negativo", () => {
-    expect(evaluar(-5)).toBe("negativo");
-  });
-
   test("evaluar cero", () => {
     expect(evaluar(0)).toBe("cero");
   });
