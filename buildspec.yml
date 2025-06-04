@@ -30,10 +30,11 @@ reports:
     discard-paths: no
 
   cobertura_codigo:
-    base-directory: coverage
+    base-directory: 'coverage'
     files:
-      - lcov.info
-    file-format: 'LCOV'
+      -lcov-report/**/*
+      - clover.xml
+    file-format: 'CLOVERXML'
     discard-paths: no
 
 
