@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - npm install
+      - npm ci
 
   build:
     commands:
@@ -13,12 +13,12 @@ phases:
       - echo "📄 Verificando archivos generados..."
       - ls -la reports coverage || true
       - echo "🧪 Reporte de pruebas (JUnit):"
-      - cat reports/junit.xml || true
+      - '[ -f reports/junit.xml ] && cat reports/junit.xml || echo "❌ junit.xml no encontrado"'
       - echo "📊 Reporte de cobertura (LCOV):"
-      - head -20 coverage/lcov.info || true
+      - '[ -f coverage/lcov.info ] && head -20 coverage/lcov.info || echo "❌ lcov.info no encontrado"'
       - echo "🔧 Corrigiendo encabezado TN..."
-      - sed -i '1iTN:DefaultTestName' coverage/lcov.info
-      - sed -i 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info
+      - sed -i '1iTN:DefaultTestName' coverage/lcov.info || true
+      - sed -i 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info || true
 
 reports:
   pruebas:
@@ -38,3 +38,4 @@ artifacts:
     - coverage/lcov.info
     - coverage/lcov-report/index.html
     - coverage/coverage-final.json
+    - dist/**
