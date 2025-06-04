@@ -10,23 +10,17 @@ phases:
   build:
     commands:
       - npm test
-      - echo "Verificando archivo de junit:"
-      - ls -la reports || true
-      - cat reports/junit.xml || true
+      - echo "--- Verificando cobertura ---"
+      - cat coverage/lcov.info | head -20 || echo "No hay lcov.info"
 
 reports:
   cobertura:
     files:
       - coverage/lcov.info
     file-format: LCOV
-  pruebas:
-    files:
-      - reports/junit.xml
-    file-format: JUNITXML
 
 artifacts:
   files:
     - coverage/lcov.info
     - coverage/lcov-report/index.html
     - coverage/coverage-final.json
-    - reports/junit.xml
