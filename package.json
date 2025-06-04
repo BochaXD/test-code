@@ -3,20 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --runInBand",
-    "check-passrate": "node check-passrate.js"
+    "test": "jest --coverage --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "left-pad": "^0.0.3",
+    "outdated": "^0.1.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",
     "jest-junit": "^16.0.0",
-    "supertest": "^7.1.1",
-    "xml2js": "^0.6.2"
+    "supertest": "^7.1.1"
   }
 }
