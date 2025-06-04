@@ -17,10 +17,10 @@ phases:
         fi
 
       - echo "🔍 Verificando librerías desactualizadas..."
-- npm outdated --json > outdated.json || true
-- if [ -s outdated.json ]; then
-    echo "⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.json' para más detalles."
-  fi
+      - npm outdated --json > outdated.json || true
+      - if [ -s outdated.json ]; then
+          echo "⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.json' para más detalles."
+        fi
 
 
   build:
