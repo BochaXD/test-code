@@ -1,6 +1,5 @@
-// tests/app.test.js
 const request = require("supertest");
-const app = require("../src/app");
+const { app, suma, evaluar } = require("../src/app");
 
 describe("API Endpoints", () => {
   it("GET /hello should return Hello World!", async () => {
@@ -21,19 +20,25 @@ describe("API Endpoints", () => {
     expect(res.body.error).toBe("Invalid input");
   });
 
-  test.skip('Omitido: esta prueba fue omitida', () => {
-    expect(true).toBe(false); // 🟠 omitido
+  test.skip("Omitido: esta prueba fue omitida", () => {
+    expect(true).toBe(false);
+  });
+});
+
+describe("Funciones puras", () => {
+  test("suma de 2 + 3", () => {
+    expect(suma(2, 3)).toBe(5);
   });
 
-  function evaluar(valor) {
-  if (valor > 0) return "positivo";
-  else if (valor < 0) return "negativo";
-  else return "cero";
-}
+  test("evaluar positivo", () => {
+    expect(evaluar(10)).toBe("positivo");
+  });
 
-  
-test('positivo', () => expect(evaluar(5)).toBe("positivo"));
-test('negativo', () => expect(evaluar(-3)).toBe("negativo"));
-test('cero', () => expect(evaluar(0)).toBe("cero"));
-  
+  test("evaluar negativo", () => {
+    expect(evaluar(-5)).toBe("negativo");
+  });
+
+  test("evaluar cero", () => {
+    expect(evaluar(0)).toBe("cero");
+  });
 });
