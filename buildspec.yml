@@ -6,6 +6,15 @@ phases:
       nodejs: 18
     commands:
       - npm ci
+      # Validación de librerías deprecadas
+      - echo "=== Checando librerías deprecadas ==="
+      - npm ls deprecated > deprecated.txt || true
+      - cat deprecated.txt
+      - if grep -q 'deprecated' deprecated.txt; then echo "¡Hay librerías deprecadas!"; exit 1; fi
+      # Validación de vulnerabilidades de dependencias
+      - echo "=== Checando vulnerabilidades ==="
+      - npm audit --audit-level=moderate --json > audit.json || true
+      - node check-audit.js
 
   build:
     commands:
@@ -14,7 +23,6 @@ phases:
       - ls -la reports || echo "No existe carpeta reports"
       - echo "=== Primeras líneas de junit.xml ==="
       - cat reports/junit.xml | head || echo "No existe junit.xml"
-
 
 reports:
   pruebas:
@@ -30,7 +38,6 @@ reports:
       - 'clover.xml'
     file-format: 'CLOVERXML'
     discard-paths: no
-
 
 artifacts:
   files:
