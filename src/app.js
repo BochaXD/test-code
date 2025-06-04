@@ -19,5 +19,10 @@ function suma(a, b) {
   const resultado = a + b;
   return resultado;
 }
+function evaluar(x) {
+  if (x > 0) return "positivo";
+  else if (x < 0) return "negativo";
+  return "cero";
+}
 
 module.exports = app;
