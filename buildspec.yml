@@ -7,7 +7,7 @@ phases:
     commands:
       - npm install
 
-  build:
+   build:
     commands:
       - npm test
       - echo "📄 Verificando archivos generados..."
@@ -16,6 +16,9 @@ phases:
       - cat reports/junit.xml || true
       - echo "📊 Reporte de cobertura (LCOV):"
       - head -20 coverage/lcov.info || true
+      - echo "🔧 Corrigiendo TN vacío..."
+      - sed -i 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info
+
 
 reports:
   pruebas:
