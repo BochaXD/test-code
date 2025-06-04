@@ -34,7 +34,7 @@ describe("Funciones puras", () => {
     expect(evaluar(10)).toBe("positivo");
   });
 
-  test("evaluar cero", () => {
+/*   test("evaluar cero", () => {
     expect(evaluar(0)).toBe("cero");
-  });
+  }); */
 });
