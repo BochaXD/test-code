@@ -6,10 +6,11 @@ module.exports = {
       {
         outputDirectory: "reports",
         outputName: "junit.xml",
-        suiteName: "NodeJS Test Report",
-        classNameTemplate: "{classname} → {title}",
+        suiteName: "Demo CodeBuild Completo",
+        classNameTemplate: "{classname} › {title}",
         titleTemplate: "{title}",
-        ancestorSeparator: " → "
+        ancestorSeparator: " › ",
+        addFileAttribute: true
       }
     ]
   ]
