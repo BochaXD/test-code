@@ -17,8 +17,7 @@ phases:
       - echo "📊 Reporte de cobertura (LCOV):"
       - '[ -f coverage/lcov.info ] && head -20 coverage/lcov.info || echo "❌ lcov.info no encontrado"'
       - echo "🔧 Corrigiendo encabezado TN..."
-      - sed -i '1iTN:DefaultTestName' coverage/lcov.info || true
-      - sed -i 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info || true
+      - sed 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info > tmp && mv tmp coverage/lcov.info
 
 reports:
   pruebas:
