@@ -10,9 +10,11 @@ phases:
   build:
     commands:
       - npm test
-      - echo "Verificando archivos generados:"
+      - echo "📄 Verificando archivos generados..."
       - ls -la reports coverage || true
+      - echo "🧪 Reporte de pruebas (JUnit):"
       - cat reports/junit.xml || true
+      - echo "📊 Reporte de cobertura (LCOV):"
       - head -20 coverage/lcov.info || true
 
 reports:
@@ -22,8 +24,9 @@ reports:
     file-format: JUNITXML
 
   cobertura:
+    base-directory: coverage
     files:
-      - coverage/lcov.info
+      - lcov.info
     file-format: LCOV
 
 artifacts:
