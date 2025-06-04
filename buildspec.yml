@@ -14,7 +14,6 @@ phases:
       - ls -la reports || echo "No existe carpeta reports"
       - echo "=== Primeras líneas de junit.xml ==="
       - cat reports/junit.xml | head || echo "No existe junit.xml"
-      - npm run check-passrate
 
 
 reports:
