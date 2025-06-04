@@ -20,7 +20,7 @@
   "jest-junit": {
   "outputDirectory": "reports",
   "outputName": "junit.xml"
-}
+},
 "jest": {
   "collectCoverageFrom": [
     "src/**/*.js"
