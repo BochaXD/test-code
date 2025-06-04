@@ -25,12 +25,22 @@ reports:
     files:
       - reports/junit.xml
     file-format: JUNITXML
+    discard-paths: no
+    base-directory: .
+    export-config:
+      report-name: node-tests-junit
+      export-path: report-pruebas
 
   cobertura:
-    base-directory: coverage
     files:
       - lcov.info
+    base-directory: coverage
     file-format: LCOV
+    discard-paths: no
+    export-config:
+      report-name: node-tests-cobertura
+      export-path: report-cobertura
+
 
 artifacts:
   files:
