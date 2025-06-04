@@ -1,17 +1,13 @@
 module.exports = {
-  reporters: [
-    "default",
-    [
-      "jest-junit",
-      {
-        outputDirectory: "reports",
-        outputName: "junit.xml",
-        suiteName: "Demo CodeBuild Completo",
-        classNameTemplate: "{classname} › {title}",
-        titleTemplate: "{title}",
-        ancestorSeparator: " › ",
-        addFileAttribute: true
-      }
-    ]
-  ]
+  collectCoverage: true,
+  coverageDirectory: "coverage",
+  coverageReporters: ["lcov", "text-summary"],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  }
 };
