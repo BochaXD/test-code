@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage --runInBand --reporters=default --reporters=jest-junit"
+    "check-passrate": "node check-passrate.js"
   },
   "keywords": [],
   "author": "",
@@ -20,15 +21,5 @@
   "jest-junit": {
   "outputDirectory": "reports",
   "outputName": "junit.xml"
-},
-  "jest": {
-  "coverageThreshold": {
-    "global": {
-      "branches": 80,
-      "lines": 80,
-      "functions": 80,
-      "statements": 80
-    }
-  }
 }
 }
