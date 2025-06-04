@@ -33,4 +33,9 @@ describe("API Endpoints", () => {
   test('Desconocido: falla asincrónica sin assert', async () => {
     await new Promise((_, reject) => setTimeout(() => reject('Desconocido'), 10));
   });
+  function evaluar(valor) {
+  if (valor > 0) return "positivo";
+  else if (valor < 0) return "negativo";
+  else return "cero";
+}
 });
