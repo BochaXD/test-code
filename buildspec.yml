@@ -6,26 +6,22 @@ phases:
       nodejs: 18
     commands:
       - npm ci
-
-      # Checar librerías deprecadas
-      - echo "=== Checando librerías deprecadas ==="
+      - echo "🔍 Verificando librerías deprecadas..."
       - npm ls deprecated > deprecated.txt || true
       - cat deprecated.txt
-      - if grep -q 'deprecated' deprecated.txt; then echo "librerías deprecadas"; exit 1; fi
-
-      # Checar librerías desactualizadas
-      - echo "=== Checando librerías desactualizadas ==="
+      - if grep -q 'deprecated' deprecated.txt; then echo "❌ Se encontraron librerías deprecadas. Revisa 'deprecated.txt' para más detalles."; exit 1; fi
+      - echo "🔍 Verificando librerías desactualizadas..."
       - npm outdated > outdated.txt || true
       - cat outdated.txt
-      - if grep -q 'Package' outdated.txt; then echo "librerías desactualizadas"; exit 1; fi
+      - if grep -q 'Package' outdated.txt; then echo "⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.txt' para más detalles."; exit 1; fi
 
   build:
     commands:
       - npm test
-      - echo "=== Contenido de reports/ ==="
-      - ls -la reports || echo "No existe carpeta reports"
-      - echo "=== Primeras líneas de junit.xml ==="
-      - cat reports/junit.xml | head || echo "No existe junit.xml"
+      - echo "📁 Contenido del directorio 'reports/':"
+      - ls -la reports || echo "⚠️ El directorio 'reports' no existe."
+      - echo "📄 Primeras líneas de 'junit.xml':"
+      - cat reports/junit.xml | head || echo "⚠️ El archivo 'junit.xml' no existe."
 
 reports:
   pruebas:
