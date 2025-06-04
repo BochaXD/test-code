@@ -22,13 +22,6 @@ phases:
       - grep "^TN:" coverage/lcov.info
 
 reports:
-  pruebas:
-    base-directory: .
-    files:
-      - reports/junit.xml
-    file-format: JUNITXML
-    discard-paths: no
-
   cobertura:
     base-directory: coverage
     files:
