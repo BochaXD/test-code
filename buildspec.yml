@@ -10,6 +10,7 @@ phases:
   build:
     commands:
       - npm test
+      - npm run check-passrate
       - echo "📄 Verificando archivos generados..."
       - ls -la reports coverage || true
       - echo "🧪 Reporte de pruebas (JUnit):"
