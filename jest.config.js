@@ -1,10 +1,10 @@
 module.exports = {
-  rootDir: ".",  // Asegura rutas relativas correctas
+  rootDir: ".",  
   collectCoverage: true,
-  collectCoverageFrom: ["src/**/*.js"],  // Incluye todos los archivos en src
+  collectCoverageFrom: ["src/**/*.js"], 
   coverageDirectory: "coverage",
   coverageReporters: ["lcov", "text", "text-summary"],
-  coverageProvider: "v8",  // Mejora compatibilidad y precisión
+  coverageProvider: "v8",  
   reporters: [
     "default",
     [
