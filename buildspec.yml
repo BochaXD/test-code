@@ -7,17 +7,21 @@ phases:
     commands:
       - npm ci
 
-      # Checar librerías deprecadas
-      - echo "=== Checando librerías deprecadas ==="
-      - npm ls deprecated > deprecated.txt || true
-      - cat deprecated.txt
-      - if grep -q 'deprecated' deprecated.txt; then echo "¡Hay librerías deprecadas!"; exit 1; fi
+      # Verificar dependencias obsoletas
+      - echo "=== Verificando dependencias obsoletas ==="
+      - npm install -g npm-deprecated-check
+      - ndc current --failfast
 
-      # Checar librerías desactualizadas
-      - echo "=== Checando librerías desactualizadas ==="
+      # Verificar dependencias desactualizadas
+      - echo "=== Verificando dependencias desactualizadas ==="
       - npm outdated > outdated.txt || true
       - cat outdated.txt
-      - if grep -q 'Package' outdated.txt; then echo "¡Hay librerías desactualizadas!"; exit 1; fi
+      - if grep -q 'Package' outdated.txt; then echo "¡Hay dependencias desactualizadas!"; exit 1; fi
+
+      # Auditoría de seguridad
+      - echo "=== Ejecutando auditoría de seguridad ==="
+      - npm audit --audit-level=high
+      - if [ $? -ne 0 ]; then echo "¡Vulnerabilidades de seguridad detectadas!"; exit 1; fi
 
   build:
     commands:
