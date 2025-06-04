@@ -23,7 +23,7 @@ phases:
 
 reports:
   pruebas:
-    base-directory: .
+    base-directory:'coverage'
     files:
       - reports/junit.xml
     file-format: 'JUNITXML'
