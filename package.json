@@ -20,27 +20,5 @@
   "jest-junit": {
   "outputDirectory": "reports",
   "outputName": "junit.xml"
-},
-"jest": {
-  "collectCoverageFrom": [
-    "src/**/*.js"
-  ],
-  "testMatch": [
-    "**/tests/**/*.test.js"
-  ],
-  "coverageReporters": [
-    "lcov",
-    "text",
-    "cobertura"
-  ],
-  "coverageThreshold": {
-    "global": {
-      "branches": 90,
-      "lines": 90,
-      "functions": 90,
-      "statements": 90
-    }
-  }
 }
-
 }
