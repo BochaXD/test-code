@@ -28,6 +28,7 @@ reports:
       - reports/junit.xml
     file-format: JUNITXML
     discard-paths: no
+    report-group-type: TEST
 
   cobertura:
     base-directory: coverage
@@ -35,6 +36,8 @@ reports:
       - lcov.info
     file-format: LCOV
     discard-paths: no
+    report-group-type: CODE_COVERAGE
+
 
 artifacts:
   files:
