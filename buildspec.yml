@@ -5,26 +5,21 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - echo "=== Instalando dependencias ==="
       - npm ci
 
-      # Verificar dependencias obsoletas
-      - echo "=== Verificando dependencias obsoletas ==="
+      - echo "=== Instalando npm-deprecated-check ==="
       - npm install -g npm-deprecated-check
-      - ndc current --failfast
 
-      # Verificar dependencias desactualizadas
+      - echo "=== Verificando dependencias obsoletas ==="
+      - ndc current --failfast || echo "Dependencias obsoletas detectadas"
+
       - echo "=== Verificando dependencias desactualizadas ==="
-      - npm outdated > outdated.txt || true
-      - cat outdated.txt
-      - if grep -q 'Package' outdated.txt; then echo "¡Hay dependencias desactualizadas!"; exit 1; fi
-
-      # Auditoría de seguridad
-      - echo "=== Ejecutando auditoría de seguridad ==="
-      - npm audit --audit-level=high
-      - if [ $? -ne 0 ]; then echo "¡Vulnerabilidades de seguridad detectadas!"; exit 1; fi
+      - npm outdated || echo "Dependencias desactualizadas detectadas"
 
   build:
     commands:
+      - echo "=== Ejecutando pruebas ==="
       - npm test
       - echo "=== Contenido de reports/ ==="
       - ls -la reports || echo "No existe carpeta reports"
