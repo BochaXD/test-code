@@ -32,8 +32,8 @@ reports:
   cobertura_codigo:
     base-directory: 'coverage'
     files:
-      -lcov-report/**/*
-      - clover.xml
+      - lcov-report/**/*
+      - cobertura-coverage.xml
     file-format: 'CLOVERXML'
     discard-paths: no
 
