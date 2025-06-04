@@ -1,10 +1,9 @@
 module.exports = {
-  rootDir: ".",  
   collectCoverage: true,
-  collectCoverageFrom: ["src/**/*.js"], 
+  collectCoverageFrom: ["src/**/*.js"],
   coverageDirectory: "coverage",
-  coverageReporters: ["lcovonly", "text", "text-summary"],
-  coverageProvider: "v8",  
+  coverageReporters: ["lcov", "text", "clover"],
+  coverageProvider: "v8",
   reporters: [
     "default",
     [
