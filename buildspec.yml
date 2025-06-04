@@ -18,6 +18,8 @@ phases:
       - '[ -f coverage/lcov.info ] && head -20 coverage/lcov.info || echo "❌ lcov.info no encontrado"'
       - echo "🔧 Corrigiendo encabezado TN..."
       - sed 's/^TN:$/TN:DefaultTestName/' coverage/lcov.info > tmp && mv tmp coverage/lcov.info
+      - echo "🔍 Verificación del TN corregido:"
+      - grep "^TN:" coverage/lcov.info
 
 reports:
   pruebas:
