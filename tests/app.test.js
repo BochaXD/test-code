@@ -30,4 +30,10 @@ describe("API Endpoints", () => {
   else if (valor < 0) return "negativo";
   else return "cero";
 }
+
+  
+test('positivo', () => expect(evaluar(5)).toBe("positivo"));
+test('negativo', () => expect(evaluar(-3)).toBe("negativo"));
+test('cero', () => expect(evaluar(0)).toBe("cero"));
+  
 });
