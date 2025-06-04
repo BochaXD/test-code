@@ -25,15 +25,15 @@ reports:
   pruebas:
     base-directory: 'coverage'
     files:
-      - reports/junit.xml
+      - 'reports/junit.xml'
     file-format: 'JUNITXML'
     discard-paths: no
 
   cobertura_codigo:
     base-directory: 'coverage'
     files:
-      - lcov-report/**/*
-      - cobertura-coverage.xml
+      - 'lcov-report/**/*'
+      - 'clover.xml'
     file-format: 'CLOVERXML'
     discard-paths: no
 
