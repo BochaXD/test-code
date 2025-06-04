@@ -3,7 +3,7 @@ const fs = require("fs");
 const xml2js = require("xml2js");
 
 const junitPath = "./reports/junit.xml";
-const MIN_PASSRATE = 85; // % mínimo aceptado
+const MIN_PASSRATE = 90; 
 
 fs.readFile(junitPath, (err, data) => {
   if (err) {
@@ -15,7 +15,6 @@ fs.readFile(junitPath, (err, data) => {
       console.error("No se pudo parsear junit.xml");
       process.exit(1);
     }
-    // Cambia esto según la estructura de tu junit.xml (puede ser testsuites o testsuite)
     let suite =
       result.testsuite ||
       (result.testsuites &&
