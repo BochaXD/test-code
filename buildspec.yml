@@ -29,7 +29,7 @@ reports:
     file-format: JUNITXML
     discard-paths: no
 
-  cobertura:
+  cobertura-lcov:
     base-directory: coverage
     files:
       - lcov.info
