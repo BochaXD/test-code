@@ -5,39 +5,23 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - echo -e "\033[1;34m🔄 Instalando dependencias...\033[0m"
-      - npm ci
+      - npm ci --silent
 
-      # Chequeo de librerías deprecadas con npm-deprecated-check (usando npx para no instalar global)
-      - echo -e "\033[1;34m🔍 Checando librerías deprecadas...\033[0m"
-      - npx npm-deprecated-check current > deprecated-ndc.txt || true
+      - npx npm-deprecated-check --silent current > deprecated-ndc.txt || true
       - |
         if grep -q 'DEPRECATED' deprecated-ndc.txt; then
-          echo -e "\033[1;33m⚠️  Se encontraron librerías DEPRECADAS. Revisa 'deprecated-ndc.txt' para más detalles.\033[0m"
-          cat deprecated-ndc.txt
-        else
-          echo -e "\033[1;32m✅ No se encontraron librerías deprecadas.\033[0m"
+          echo -e "\033[1;33m⚠️  Hay librerías DEPRECADAS. Ver 'deprecated-ndc.txt'.\033[0m"
         fi
 
-      # Chequeo de librerías desactualizadas
-      - echo -e "\033[1;34m🔍 Checando librerías desactualizadas...\033[0m"
       - npm outdated > outdated.txt || true
       - |
         if grep -q 'Package' outdated.txt; then
-          echo -e "\033[1;33m⚠️  Se encontraron librerías DESACTUALIZADAS. Revisa 'outdated.txt' para más detalles.\033[0m"
-          cat outdated.txt
-        else
-          echo -e "\033[1;32m✅ Todas las librerías están actualizadas.\033[0m"
+          echo -e "\033[1;33m⚠️  Hay librerías DESACTUALIZADAS. Ver 'outdated.txt'.\033[0m"
         fi
 
   build:
     commands:
-      - echo -e "\033[1;34m🧪 Ejecutando pruebas y cobertura...\033[0m"
-      - npm test
-      - echo -e "\033[1;34m📁 Contenido de reports/:\033[0m"
-      - ls -la reports || echo "No existe carpeta reports"
-      - echo -e "\033[1;34m📄 Primeras líneas de junit.xml:\033[0m"
-      - cat reports/junit.xml | head || echo "No existe junit.xml"
+      - npm test --silent
 
 reports:
   pruebas:
