@@ -7,10 +7,10 @@ phases:
     commands:
       - npm ci --silent
       - |
-        DEP_MSG=$(npx npm-deprecated-check current || true)
-        if echo "$DEP_MSG" | grep -q 'DEPRECATED'; then
-          echo -e "\033[1;33m⚠️  Hay librerías DEPRECADAS:\033[0m"
-          echo "$DEP_MSG" | head -20
+        NDC_RESULT=$(npx npm-deprecated-check current 2>/dev/null | grep -Ev '^[⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏] Checking…')
+        if [ -n "$NDC_RESULT" ]; then
+          echo -e "\033[1;33m=== Resultado de librerías deprecadas ===\033[0m"
+          echo "$NDC_RESULT"
         else
           echo "✅ No se encontraron librerías deprecadas."
         fi
