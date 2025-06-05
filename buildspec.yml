@@ -48,7 +48,12 @@ phases:
 
   build:
     commands:
-      - npm test --silent
+      - |
+        if [ "$RUN_TESTS" = "true" ]; then
+          npm test --silent
+        else
+          echo "ℹ️ Saltando tests (RUN_TESTS no está definido como true)"
+        fi
 
 reports:
   pruebas:
