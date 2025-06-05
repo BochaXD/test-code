@@ -7,12 +7,13 @@ phases:
     commands:
       - npm ci --silent
 
-      # Mostrar solo las librerías deprecadas encontradas (sin spinners ni warnings de node)
+      # Chequeo deprecados (warning, no detiene)
       - |
-        DEP_MSG=$(npx npm-deprecated-check current 2>/dev/null | grep 'deprecated:' | awk -F'deprecated:' '{print $2}' | sed '/^[[:space:]]*$/d')
-        if [ -n "$DEP_MSG" ]; then
-          echo -e "\033[1;33m⚠️  Librerías DEPRECADAS encontradas:\033[0m"
-          echo "$DEP_MSG"
+        NDC_RESULT=$(npx npm-deprecated-check current 2>/dev/null)
+        DEPS=$(echo "$NDC_RESULT" | awk 'f{print "\033[1;33m⚠️ " pkg "\n" $0 "\033[0m";f=0}{if($0 ~ /^ WARN  /){pkg=$0;f=1}}')
+        if [ -n "$DEPS" ]; then
+          echo -e "⚠️  Librerías DEPRECADAS encontradas:"
+          echo -e "$DEPS"
         else
           echo "✅ No se encontraron librerías deprecadas."
         fi
