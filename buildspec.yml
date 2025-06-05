@@ -5,27 +5,21 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      # Instalación silenciosa
       - npm ci --silent
 
-      # Revisar librerías deprecadas
-      - npx npm-deprecated-check --silent current > deprecated-ndc.txt || true
+      # Chequeo deprecados (warning, no detiene)
+      - npx npm-deprecated-check current > deprecated-ndc.txt || true
       - |
         if grep -q 'DEPRECATED' deprecated-ndc.txt; then
-          echo -e "\033[1;33m⚠️  Hay librerías DEPRECADAS. Consulta el archivo deprecated-ndc.txt para más detalles.\033[0m"
-          echo "----- Extracto de librerías deprecadas -----"
-          head -20 deprecated-ndc.txt
-          echo "-------------------------------------------"
-        else
-          echo "✅ No se encontraron librerías deprecadas."
+          echo -e "\033[1;33m⚠️  Hay librerías DEPRECADAS. Ver 'deprecated-ndc.txt'.\033[0m"
         fi
 
-      # Revisar librerías desactualizadas
-      - npm outdated --silent > outdated.txt || true
+      # Chequeo desactualizados (warning, no detiene)
+      - npm outdated > outdated.txt || true
       - |
         if grep -q 'Package' outdated.txt; then
-          echo -e "\033[1;33m⚠️  Hay librerías DESACTUALIZADAS. Consulta el archivo outdated.txt para más detalles.\033[0m"
-        else
-          echo "✅ Todas las librerías están actualizadas."
+          echo -e "\033[1;33m⚠️  Hay librerías DESACTUALIZADAS. Ver 'outdated.txt'.\033[0m"
         fi
 
   build:
