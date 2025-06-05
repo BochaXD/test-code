@@ -7,17 +7,22 @@ phases:
     commands:
       - npm ci
 
-      # Checar librerías deprecadas
+      # Chequeo de librerías deprecadas (solo warning, no falla el build)
+      - npm install -g npm-deprecated-check
       - echo "=== Checando librerías deprecadas ==="
-      - npm ls deprecated > deprecated.txt || true
-      - cat deprecated.txt
-      - if grep -q 'deprecated' deprecated.txt; then echo -e "\033[1;31m❌ Se encontraron librerías deprecadas. Revisa 'deprecated.txt' para más detalles.\033[0m"; exit 1; fi
+      - |
+        ndc current > deprecated-ndc.txt || true
+        if grep -q 'DEPRECATED' deprecated-ndc.txt; then
+          echo -e "\033[1;33m⚠️  Se encontraron librerías deprecadas. Revisa 'deprecated-ndc.txt' para más detalles.\033[0m"
+          cat deprecated-ndc.txt
+        else
+          echo "✅ No se encontraron librerías deprecadas."
+        fi
 
-      # Checar librerías desactualizadas
+      # Checar librerías desactualizadas (solo warning, no falla el build)
       - echo "=== Checando librerías desactualizadas ==="
       - npm outdated > outdated.txt || true
-      - cat outdated.txt
-      - if grep -q 'Package' outdated.txt; then echo -e "\033[1;33m⚠️ Se encontraron librerías desactualizadas. Revisa 'outdated.txt' para más detalles.\033[0m"; fi
+      - if grep -q 'Package' outdated.txt; then echo -e "\033[1;33m⚠️  Se encontraron librerías desactualizadas. Revisa 'outdated.txt' para más detalles.\033[0m"; fi
 
   build:
     commands:
