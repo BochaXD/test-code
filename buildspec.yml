@@ -5,15 +5,14 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      # Instalación silenciosa
       - npm ci --silent
 
-      # Chequeo deprecados (warning, no detiene)
+      # Mostrar solo las librerías deprecadas encontradas (sin spinners ni warnings de node)
       - |
-        DEP_MSG=$(ndc current || true)
-        if echo "$DEP_MSG" | grep -q 'DEPRECATED'; then
-          echo -e "\033[1;33m⚠️  Hay librerías DEPRECADAS:\033[0m"
-          echo "$DEP_MSG" | head -20
+        DEP_MSG=$(npx npm-deprecated-check current 2>/dev/null | grep 'deprecated:' | awk -F'deprecated:' '{print $2}' | sed '/^[[:space:]]*$/d')
+        if [ -n "$DEP_MSG" ]; then
+          echo -e "\033[1;33m⚠️  Librerías DEPRECADAS encontradas:\033[0m"
+          echo "$DEP_MSG"
         else
           echo "✅ No se encontraron librerías deprecadas."
         fi
