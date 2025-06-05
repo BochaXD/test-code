@@ -6,17 +6,11 @@ phases:
       nodejs: 18
     commands:
       - npm ci --silent
-
       - |
         NDC_RESULT="$(npx npm-deprecated-check current 2>/dev/null)"
-        DEP_MSG=$(echo "$NDC_RESULT" | awk '
-          BEGIN{warn=0}
-          /^ WARN  / {pkg=$0;warn=1;next}
-          warn {if(/^deprecated:/){print "\033[1;33m⚠️ " pkg "\n" $0 "\033[0m"};warn=0}
-        ')
-        if [ -n "$DEP_MSG" ]; then
-          echo -e "⚠️  Librerías DEPRECADAS encontradas:"
-          echo -e "$DEP_MSG"
+        if echo "$NDC_RESULT" | grep -q 'WARN'; then
+          echo -e "\033[1;33m⚠️  Dependencias posiblemente deprecadas encontradas:\033[0m"
+          echo "$NDC_RESULT"
         else
           echo "✅ No se encontraron librerías deprecadas."
         fi
