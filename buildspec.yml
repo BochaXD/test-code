@@ -52,7 +52,7 @@ phases:
         if [ "$RUN_TESTS" = "true" ]; then
           npm test --silent
         else
-          echo "ℹ️ Saltando tests (RUN_TESTS no está definido como true)"
+          echo "ℹ️ Saltando tests"
         fi
 
 reports:
