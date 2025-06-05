@@ -5,7 +5,7 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
-      - npm ci --silent
+      - npm ci --omit=dev --silent
       - |
         DEP_MSG=$(npx npm-deprecated-check current 2>&1 | grep -v 'Checking')
         if echo "$DEP_MSG" | grep -q 'deprecated:'; then
