@@ -12,6 +12,9 @@ phases:
       - |
         if grep -q 'DEPRECATED' deprecated-ndc.txt; then
           echo -e "\033[1;33m⚠️  Hay librerías DEPRECADAS. Consulta el archivo deprecated-ndc.txt para más detalles.\033[0m"
+          echo "----- Extracto de librerías deprecadas -----"
+          head -20 deprecated-ndc.txt
+          echo "-------------------------------------------"
         else
           echo "✅ No se encontraron librerías deprecadas."
         fi
