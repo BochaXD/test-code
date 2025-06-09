@@ -6,7 +6,7 @@ phases:
       nodejs: 16
     commands:
       - npm ci --omit=dev --silent
-      - - aws s3 cp s3://reportecoverage/coverage/checks.sh ./checks.sh
+      - aws s3 cp s3://reportecoverage/coverage/checks.sh ./checks.sh
       - chmod +x ./checks.sh
   build:
     commands:
