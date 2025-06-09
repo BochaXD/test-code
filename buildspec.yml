@@ -10,12 +10,7 @@ phases:
       - chmod +x ./checks.sh
   build:
     commands:
-      - |
-        if [ "$RUN_TESTS" = "true" ]; then
-          npm test --silent
-        else
-          echo "ℹ️ Saltando tests"
-        fi
+      - npm test --silent
       - echo "Subiendo reportes de cobertura y pruebas unitarias a S3..."
       - aws s3 cp coverage/lcov-report/ s3://reportecoverage/coverage/ppx-security-back/reporte/lcov-report/ --recursive
       - aws s3 cp coverage/lcov.info s3://reportecoverage/coverage/ppx-security-back/reporte/lcov.info
