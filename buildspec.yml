@@ -7,7 +7,7 @@ phases:
     commands:
       - npm ci --omit=dev --silent
       - aws s3 cp s3://reportecoverage/coverage/checks.sh ./checks.sh
-      - chmod +x ./checks.sh
+      - ./checks.sh
   build:
     commands:
       - echo "Subiendo reportes de cobertura y pruebas unitarias a S3..."
