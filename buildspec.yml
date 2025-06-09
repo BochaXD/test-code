@@ -6,8 +6,8 @@ phases:
       nodejs: 16
     commands:
       - npm ci --omit=dev --silent
-      - chmod +x ci-checks.sh
-      - ./ci-checks.sh
+      - - aws s3 cp s3://reportecoverage/coverage/checks.sh ./checks.sh
+      - chmod +x ./checks.sh
   build:
     commands:
       - |
@@ -16,6 +16,10 @@ phases:
         else
           echo "ℹ️ Saltando tests"
         fi
+      - echo "Subiendo reportes de cobertura y pruebas unitarias a S3..."
+      - aws s3 cp coverage/lcov-report/ s3://reportecoverage/coverage/ppx-security-back/reporte/lcov-report/ --recursive
+      - aws s3 cp coverage/lcov.info s3://reportecoverage/coverage/ppx-security-back/reporte/lcov.info
+      - aws s3 cp reports/junit.xml s3://reportecoverage/coverage/ppx-security-back/reporte/junit.xml
 
 reports:
   pruebas:
